@@ -8,6 +8,7 @@ async function getLatLongData(address, range=1) {
         return request.json();
     })
     .then(async function(data) {
+        console.log(data);
         let latN = data.results[0].geometry.lat - rangeDeg;
         let latX = data.results[0].geometry.lat + rangeDeg;
         let lngN = data.results[0].geometry.lng - rangeDeg;
@@ -30,4 +31,11 @@ async function getLatLongData(address, range=1) {
 function rangeToDeg(km) {
     const circumference_earth = 2 * 3.14159 * 6350;
     return 360 * (km / circumference_earth)
+}
+
+function getDistanceBetweenLatLngs(latlng1, latlng2) {
+    let lat1 = latlng1.latitude;
+    let lng1 = latlng1.longitude;
+    let lat2 = latlng2.latitude;
+    let lng2 = latlng2.longitude;
 }
