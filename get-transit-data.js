@@ -19,7 +19,7 @@ async function getTransitData(latlngData, numStops=5) {
                 "latitude": data[1][d],
                 "longitude": data[2][d]
             }
-            let dist = getDistanceBetweenLatLngs(latlng, latlngS);
+            let dist = Math.round(getDistanceBetweenLatLngs(latlng, latlngS)*100)/100;
             let addr = await getAddressData(latlngS);
             console.log(addr);
             let outputEntry = {
@@ -31,7 +31,7 @@ async function getTransitData(latlngData, numStops=5) {
             }
             outputData.push(outputEntry);
         }
-        if (count >= 5) {
+        if (count >= numStops) {
             break;
         }
     }
