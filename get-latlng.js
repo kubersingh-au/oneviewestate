@@ -23,7 +23,6 @@ async function getLatLongData(address, range=1) {
                 "max": lngX
             }, 
         }
-        console.log(output)
         return output;
     })
 }
@@ -33,9 +32,20 @@ function rangeToDeg(km) {
     return 360 * (km / circumference_earth)
 }
 
+function degToKm(deg) {
+    const circumference_earth = 2 * 3.14159 * 6350;
+    return (deg / 360) * circumference_earth;
+}
+
 function getDistanceBetweenLatLngs(latlng1, latlng2) {
     let lat1 = latlng1.latitude;
     let lng1 = latlng1.longitude;
     let lat2 = latlng2.latitude;
     let lng2 = latlng2.longitude;
+
+    let diffLat = lat2 - lat1;
+    let diffLng = lng2 - lng1;
+
+    let distDeg = Math.sqrt(Math.pow(degToKm(diffLat), 2) + Math.pow(degToKm(diffLng), 2));
+    return distDeg;
 }
