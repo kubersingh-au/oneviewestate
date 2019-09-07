@@ -1,0 +1,33 @@
+async function getLatLongData(address, range=1) {
+    const API_KEY = "afec3173bc3b4d5fae15bc5646cfe2a9";
+
+    let url = `https://api.opencagedata.com/geocode/v1/json?key=${API_KEY}&q=${address}`;
+    let rangeDeg = rangeToDeg(range);
+    return await fetch(url)
+    .then(async function(request) {
+        return request.json();
+    })
+    .then(async function(data) {
+        let latN = data.results[0].geometry.lat - rangeDeg;
+        let latX = data.results[0].geometry.lat + rangeDeg;
+        let lngN = data.results[0].geometry.lng - rangeDeg;
+        let lngX = data.results[0].geometry.lng + rangeDeg;
+        let output = {
+            "latitude": {
+                "min": latN,
+                "max": latX
+            }, 
+            "longitude": {
+                "min": lngN,
+                "max": lngX
+            }, 
+        }
+        console.log(output)
+        return output;
+    })
+}
+
+function rangeToDeg(km) {
+    const circumference_earth = 2 * 3.14159 * 6350;
+    return 360 * (km / circumference_earth)
+}
