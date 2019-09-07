@@ -3,7 +3,9 @@ async function runCode() {
     let llD = await getLatLongData(address);
     let parkData = await getParkData(llD);
     localStorage.setItem("park-data", JSON.stringify(parkData));
-    //window.location.href = "AddressSubmission.html"
+    let transitData = await getTransitData(llD);
+    localStorage.setItem("transit-data", JSON.stringify(transitData));
+    //window.location.href = "AddressSubmission.html";
 }
 
 function getArgs() {
