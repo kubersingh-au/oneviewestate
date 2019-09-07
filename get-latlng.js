@@ -27,6 +27,23 @@ async function getLatLongData(address, range=1) {
     })
 }
 
+async function getAddressData(latlng) {
+    const API_KEY = "afec3173bc3b4d5fae15bc5646cfe2a9";
+    let lat = latlng.latitude;
+    let lng = latlng.longitude;
+
+    let url = `https://api.opencagedata.com/geocode/v1/json?key=${API_KEY}&q=${lat},${lng}`;
+    return await fetch(url)
+    .then(async function(request) {
+        return request.json();
+    })
+    .then(async function(data) {
+        print(data);
+        output = data.results[0].formatted
+        return output;
+    })
+}
+
 function rangeToDeg(km) {
     const circumference_earth = 2 * 3.14159 * 6350;
     return 360 * (km / circumference_earth)
