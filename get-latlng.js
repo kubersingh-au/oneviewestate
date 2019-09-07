@@ -21,8 +21,10 @@ async function getLatLongData(address, range=1) {
             "longitude": {
                 "min": lngN,
                 "max": lngX
-            }, 
+            }
         }
+
+        localStorage.setItem("req-left", data.rate.remaining);
         return output;
     })
 }
@@ -40,6 +42,8 @@ async function getAddressData(latlng) {
     .then(async function(data) {
         console.log(data);
         output = data.results[0].formatted;
+
+        localStorage.setItem("req-left", data.rate.remaining);
         return output;
     })
 }
