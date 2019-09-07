@@ -38,8 +38,8 @@ async function getAddressData(latlng) {
         return request.json();
     })
     .then(async function(data) {
-        print(data);
-        output = data.results[0].formatted
+        console.log(data);
+        output = data.results[0].formatted;
         return output;
     })
 }

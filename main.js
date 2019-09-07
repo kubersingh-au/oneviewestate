@@ -5,7 +5,7 @@ async function runCode() {
     localStorage.setItem("park-data", JSON.stringify(parkData));
     let transitData = await getTransitData(llD);
     localStorage.setItem("transit-data", JSON.stringify(transitData));
-    window.location.href = "OneViewResults.html";
+    //window.location.href = "OneViewResults.html";
 }
 
 function getArgs() {
