@@ -6,15 +6,27 @@ async function runCode() {
     let address = getArgs();
     let llD = await getLatLongData(address);
     loadingStatusElement.innerHTML += "Converted address to GPS<br/>"
-    let parkData = await getParkData(llD);
-    localStorage.setItem("park-data", JSON.stringify(parkData));
-    loadingStatusElement.innerHTML += "Found all nearby parks<br/>";
-    let transitData = await getTransitData(llD);
-    localStorage.setItem("transit-data", JSON.stringify(transitData));
-    loadingStatusElement.innerHTML += "Found all nearby transit stations<br/>";
+    
+    parkAPI(llD);
+    await transitAPI(llD);
+    
     window.setTimeout(function() {
         window.location.href = "OneViewResults.html";
-    }, 1000);
+    }, 500);
+}
+
+async function parkAPI(llD) {
+    let parkDataP = getParkData(llD);
+    let parkData = await parkDataP;
+    localStorage.setItem("park-data", JSON.stringify(parkData));
+    loadingStatusElement.innerHTML += "Found all nearby parks<br/>";
+}
+
+async function transitAPI(llD) {
+    let transitDataP = getTransitData(llD);
+    let transitData = await transitDataP;
+    localStorage.setItem("transit-data", JSON.stringify(transitData));
+    loadingStatusElement.innerHTML += "Found all nearby transit stations<br/>";
 }
 
 function getArgs() {
