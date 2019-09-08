@@ -14,7 +14,6 @@ async function getParkData(latlngData, numParks=2) {
         return response.json()
     })
     .then(async function(data) {
-        console.log(data);
         let outputData = [];
 
         for (let n = 0; n < numParks; n++) {

@@ -21,7 +21,6 @@ async function getTransitData(latlngData, numStops=5) {
             }
             let dist = Math.round(getDistanceBetweenLatLngs(latlng, latlngS)*100)/100;
             let addr = await getAddressData(latlngS);
-            console.log(addr);
             let outputEntry = {
                 "name": data[0][d].replace('"', ''),
                 "lat": data[1][d],

@@ -8,7 +8,6 @@ async function getLatLongData(address, range=1) {
         return request.json();
     })
     .then(async function(data) {
-        console.log(data);
         let latN = data.results[0].geometry.lat - rangeDeg;
         let latX = data.results[0].geometry.lat + rangeDeg;
         let lngN = data.results[0].geometry.lng - rangeDeg;
@@ -40,7 +39,6 @@ async function getAddressData(latlng) {
         return request.json();
     })
     .then(async function(data) {
-        console.log(data);
         output = data.results[0].formatted;
 
         localStorage.setItem("req-left", data.rate.remaining);
